@@ -1,0 +1,6 @@
+poetry
+fastapi==0.95.1
+uvicorn==0.22.0
+python-dotenv==1.0.0
+google-generativeai
+pydantic==1.10.7

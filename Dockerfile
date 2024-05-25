@@ -12,7 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip && pip install poetry
+COPY requirements.txt ./
+
+RUN pip install --upgrade pip && pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY pyproject.toml poetry.lock ./
 
@@ -26,6 +28,6 @@ RUN adduser --disabled-password --gecos '' fastapiuser \
 
 USER fastapiuser
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "4"]
